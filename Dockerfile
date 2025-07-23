@@ -17,5 +17,5 @@ RUN php artisan route:cache
 RUN php artisan migrate --force
 RUN chmod -R 775 storage bootstrap/cache
 
-EXPOSE 80
-CMD ["php", "-S", "0.0.0.0:80", "-t", "public"]
+CMD ["php", "-S", "0.0.0.0:8080", "-t", "public"]
+EXPOSE 8080
