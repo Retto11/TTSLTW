@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
 
 # Copy source code
 COPY . /var/www/html
+COPY .env .env
 WORKDIR /var/www/html
 
 # Cài Laravel & build frontend
@@ -17,5 +18,5 @@ RUN php artisan route:cache
 RUN php artisan migrate --force
 RUN chmod -R 775 storage bootstrap/cache
 
-CMD ["php", "-S", "0.0.0.0:8080", "-t", "public"]
-EXPOSE 8080
+CMD php -S 0.0.0.0:$PORT -t public
+EXPOSE 10000
