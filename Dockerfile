@@ -10,8 +10,12 @@ WORKDIR /var/www/html
 
 # Cài Laravel & build frontend
 RUN composer install --no-dev --optimize-autoloader
-RUN npm install && npm run build
-RUN php artisan config:cache && php artisan route:cache
+RUN npm install
+RUN npm run build
+RUN php artisan config:cache
+RUN php artisan route:cache
+RUN php artisan migrate --force
+RUN chmod -R 775 storage bootstrap/cache
 
 EXPOSE 80
 CMD ["php", "-S", "0.0.0.0:80", "-t", "public"]
